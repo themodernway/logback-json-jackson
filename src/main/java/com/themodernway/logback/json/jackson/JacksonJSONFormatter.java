@@ -37,7 +37,7 @@ import com.themodernway.logback.json.core.IJSONFormatter;
  * A {@code JacksonJSONFormatter} interface formats an object into a JSON string.
  *
  * @author Dean S. Jones
- * @since 2.0.0-SNAPSHOT
+ * @since 2.0.1-SNAPSHOT
  */
 
 public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter, IJSONCommon
