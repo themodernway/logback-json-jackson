@@ -17,6 +17,7 @@
 package com.themodernway.logback.json.jackson.test
 
 import com.themodernway.logback.json.jackson.test.util.AbstractSpecification
+import com.themodernway.logback.json.jackson.test.util.TestPOJO
 
 public class BasicTestsSpecification extends AbstractSpecification
 {
@@ -48,12 +49,23 @@ public class BasicTestsSpecification extends AbstractSpecification
         true == true
     }
 
-    def "dummy(3)"()
+    def "oops(1)"()
     {
         setup:
-        echo "dummy(3)"
+        echo "oops(1)"
 
-        logger().error("oops", new NullPointerException("hi"))
+        logger().error("oops(1)", new NullPointerException("npe"))
+
+        expect:
+        true == true
+    }
+
+    def "oops(2)"()
+    {
+        setup:
+        echo "oops(2)"
+
+        logger().error("oops(2)", new NullPointerException())
 
         expect:
         true == true
@@ -64,7 +76,11 @@ public class BasicTestsSpecification extends AbstractSpecification
         setup:
         echo "dummy(4)"
 
-        logger().info("hello", 6, 'Dean', [name: 'Jones'])
+        def pojo = new TestPOJO()
+
+        pojo.setName('Maël Hörz\u00A9\n')
+
+        logger().warn("dummy(4)", 6, 'Dean S. Jones', 3.14d, [pojo: pojo, test: false])
 
         expect:
         true == true
