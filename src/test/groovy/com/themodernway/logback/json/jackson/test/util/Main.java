@@ -22,13 +22,15 @@ import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.themodernway.logback.json.core.JSONFormattingException;
+
 public class Main
 {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(final String... strings)
     {
-        final long stop = System.currentTimeMillis() + 3600000L;
+        final long stop = System.currentTimeMillis() + 6400000L;
 
         final Timer timer = new Timer();
 
@@ -37,7 +39,11 @@ public class Main
             @Override
             public void run()
             {
-                logger.info("hi");
+                logger.info("info");
+
+                logger.warn("warn");
+
+                logger.error("oops", new JSONFormattingException("oops"));
 
                 if (System.currentTimeMillis() >= stop)
                 {
