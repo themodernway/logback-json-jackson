@@ -19,16 +19,16 @@ package com.themodernway.logback.json.jackson;
 import java.io.IOException;
 import java.io.Writer;
 
-public class NoSyncStringBuilderWriter extends Writer
+public class JSONStringBuilderWriter extends Writer
 {
     private final StringBuilder m_builder;
 
-    public NoSyncStringBuilderWriter()
+    public JSONStringBuilderWriter()
     {
         this(new StringBuilder(8192));
     }
 
-    public NoSyncStringBuilderWriter(final StringBuilder builder)
+    protected JSONStringBuilderWriter(final StringBuilder builder)
     {
         super(builder);
 
@@ -69,7 +69,7 @@ public class NoSyncStringBuilderWriter extends Writer
     }
 
     @Override
-    public NoSyncStringBuilderWriter append(final CharSequence chs) throws IOException
+    public JSONStringBuilderWriter append(final CharSequence chs) throws IOException
     {
         if (null != chs)
         {
@@ -79,7 +79,7 @@ public class NoSyncStringBuilderWriter extends Writer
     }
 
     @Override
-    public NoSyncStringBuilderWriter append(final CharSequence chs, final int beg, final int end) throws IOException
+    public JSONStringBuilderWriter append(final CharSequence chs, final int beg, final int end) throws IOException
     {
         if (null != chs)
         {
@@ -89,7 +89,7 @@ public class NoSyncStringBuilderWriter extends Writer
     }
 
     @Override
-    public NoSyncStringBuilderWriter append(final char c) throws IOException
+    public JSONStringBuilderWriter append(final char c) throws IOException
     {
         m_builder.append(c);
 
@@ -114,10 +114,8 @@ public class NoSyncStringBuilderWriter extends Writer
         // close does nothing here
     }
 
-    public NoSyncStringBuilderWriter clear()
+    public void clear()
     {
         m_builder.setLength(0);
-
-        return this;
     }
 }

@@ -42,13 +42,13 @@ import com.themodernway.logback.json.core.JSONFormattingException;
 
 public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter, IJSONCommon
 {
-    private static final long                   serialVersionUID = 1L;
+    private static final long                 serialVersionUID = 1L;
 
-    private static final List<Module>           MAPPER_MODULES   = Arrays.asList(new Jdk8Module(), new JavaTimeModule());
+    private static final List<Module>         MAPPER_MODULES   = Arrays.asList(new Jdk8Module(), new JavaTimeModule());
 
-    private static final DefaultPrettyPrinter   PRETTY_PRINTER   = buildPrettyPrinter();
+    private static final DefaultPrettyPrinter PRETTY_PRINTER   = buildPrettyPrinter();
 
-    private transient NoSyncStringBuilderWriter m_writer;
+    private transient JSONStringBuilderWriter m_json_builder;
 
     public static final DefaultPrettyPrinter buildPrettyPrinter()
     {
@@ -57,7 +57,7 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
 
     public JacksonJSONFormatter()
     {
-        m_writer = new NoSyncStringBuilderWriter();
+        m_json_builder = new JSONStringBuilderWriter();
 
         registerModules(MAPPER_MODULES).enable(JsonGenerator.Feature.ESCAPE_NON_ASCII).setDefaultPrettyPrinter(PRETTY_PRINTER);
     }
@@ -66,7 +66,7 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
     {
         super(parent);
 
-        m_writer = new NoSyncStringBuilderWriter();
+        m_json_builder = new JSONStringBuilderWriter();
     }
 
     @Override
@@ -94,9 +94,9 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
     {
         try
         {
-            writeValue(m_writer, target);
+            writeValue(m_json_builder, target);
 
-            return m_writer.toString();
+            return m_json_builder.toString();
         }
         catch (final IOException e)
         {
@@ -104,7 +104,7 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
         }
         finally
         {
-            m_writer.clear();
+            m_json_builder.clear();
         }
     }
 }
