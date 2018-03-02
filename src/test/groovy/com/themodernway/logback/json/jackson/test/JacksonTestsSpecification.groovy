@@ -36,7 +36,7 @@ public class JacksonTestsSpecification extends AbstractSpecification
         json.setPretty(true)
         json.setPretty(false)
         def valu = json.toJSONString([test: 1])
-        echo valu
+        println valu
         echo "jackson(1)"
         json.setPretty(true)
 
@@ -51,7 +51,7 @@ public class JacksonTestsSpecification extends AbstractSpecification
         json.setPretty(true)
         json.setPretty(false)
         def valu = json.toJSONString([test: 2])
-        echo valu
+        println valu
         echo "jackson(2)"
         json.setPretty(false)
 
