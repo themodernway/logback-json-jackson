@@ -48,8 +48,6 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
 
     private static final DefaultPrettyPrinter PRETTY_PRINTER   = buildPrettyPrinter();
 
-    private transient JSONStringBuilderWriter m_json_builder;
-
     public static final DefaultPrettyPrinter buildPrettyPrinter()
     {
         return new DefaultPrettyPrinter().withArrayIndenter(new DefaultIndenter().withIndent(JSON_INDENT_VALUE)).withObjectIndenter(new DefaultIndenter().withIndent(JSON_INDENT_VALUE));
@@ -57,16 +55,12 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
 
     public JacksonJSONFormatter()
     {
-        m_json_builder = new JSONStringBuilderWriter();
-
         registerModules(MAPPER_MODULES).enable(JsonGenerator.Feature.ESCAPE_NON_ASCII).setDefaultPrettyPrinter(PRETTY_PRINTER);
     }
 
     protected JacksonJSONFormatter(final JacksonJSONFormatter parent)
     {
         super(parent);
-
-        m_json_builder = new JSONStringBuilderWriter();
     }
 
     @Override
@@ -94,17 +88,11 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
     {
         try
         {
-            writeValue(m_json_builder, target);
-
-            return m_json_builder.toString();
+            return this.writeValueAsString(target);
         }
         catch (final IOException e)
         {
             throw new JSONFormattingException(e);
-        }
-        finally
-        {
-            m_json_builder.clear();
         }
     }
 }
