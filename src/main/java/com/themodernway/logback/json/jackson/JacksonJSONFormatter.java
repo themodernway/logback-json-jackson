@@ -16,12 +16,12 @@
 
 package com.themodernway.logback.json.jackson;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.Module;
@@ -47,6 +47,8 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
     private static final List<Module>         MAPPER_MODULES   = Arrays.asList(new Jdk8Module(), new JavaTimeModule());
 
     private static final DefaultPrettyPrinter PRETTY_PRINTER   = buildPrettyPrinter();
+
+    private final NoSyncStringBuilderWriter   m_writer         = new NoSyncStringBuilderWriter();
 
     public static final DefaultPrettyPrinter buildPrettyPrinter()
     {
@@ -88,11 +90,17 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
     {
         try
         {
-            return writeValueAsString(target);
+            writeValue(m_writer, target);
+
+            return m_writer.toString();
         }
-        catch (final JsonProcessingException e)
+        catch (final IOException e)
         {
             throw new JSONFormattingException(e);
+        }
+        finally
+        {
+            m_writer.clear();
         }
     }
 }
