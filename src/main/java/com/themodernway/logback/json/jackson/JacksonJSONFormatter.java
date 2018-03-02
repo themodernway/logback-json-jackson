@@ -42,13 +42,13 @@ import com.themodernway.logback.json.core.JSONFormattingException;
 
 public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter, IJSONCommon
 {
-    private static final long                 serialVersionUID = 1L;
+    private static final long                   serialVersionUID = 1L;
 
-    private static final List<Module>         MAPPER_MODULES   = Arrays.asList(new Jdk8Module(), new JavaTimeModule());
+    private static final List<Module>           MAPPER_MODULES   = Arrays.asList(new Jdk8Module(), new JavaTimeModule());
 
-    private static final DefaultPrettyPrinter PRETTY_PRINTER   = buildPrettyPrinter();
+    private static final DefaultPrettyPrinter   PRETTY_PRINTER   = buildPrettyPrinter();
 
-    private final NoSyncStringBuilderWriter   m_writer         = new NoSyncStringBuilderWriter();
+    private transient NoSyncStringBuilderWriter m_writer;
 
     public static final DefaultPrettyPrinter buildPrettyPrinter()
     {
@@ -57,12 +57,16 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
 
     public JacksonJSONFormatter()
     {
+        m_writer = new NoSyncStringBuilderWriter();
+
         registerModules(MAPPER_MODULES).enable(JsonGenerator.Feature.ESCAPE_NON_ASCII).setDefaultPrettyPrinter(PRETTY_PRINTER);
     }
 
     protected JacksonJSONFormatter(final JacksonJSONFormatter parent)
     {
         super(parent);
+
+        m_writer = new NoSyncStringBuilderWriter();
     }
 
     @Override

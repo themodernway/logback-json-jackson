@@ -42,7 +42,7 @@ public class NoSyncStringBuilderWriter extends Writer
     }
 
     @Override
-    public void write(final char chr[], final int off, final int len) throws IOException
+    public void write(final char[] chr, final int off, final int len) throws IOException
     {
         if (null != chr)
         {
@@ -105,11 +105,13 @@ public class NoSyncStringBuilderWriter extends Writer
     @Override
     public void flush()
     {
+        // flush does nothing here
     }
 
     @Override
     public void close() throws IOException
     {
+        // close does nothing here
     }
 
     public NoSyncStringBuilderWriter clear()
