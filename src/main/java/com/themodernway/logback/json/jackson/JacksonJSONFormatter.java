@@ -88,7 +88,7 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
     {
         try
         {
-            return this.writeValueAsString(target);
+            return writeValueAsString(target);
         }
         catch (final IOException e)
         {
