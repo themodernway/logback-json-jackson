@@ -17,9 +17,9 @@
 package com.themodernway.logback.json.jackson.test
 
 import com.themodernway.logback.json.jackson.JacksonJSONFormatter
-import com.themodernway.logback.json.jackson.test.util.AbstractSpecification
+import com.themodernway.logback.json.jackson.test.util.AbstractTestJSONSpecification
 
-public class JacksonTestsSpecification extends AbstractSpecification
+public class JacksonTestsSpecification extends AbstractTestJSONSpecification
 {
     def setupSpec()
     {

@@ -16,10 +16,10 @@
 
 package com.themodernway.logback.json.jackson.test
 
-import com.themodernway.logback.json.jackson.test.util.AbstractSpecification
+import com.themodernway.logback.json.jackson.test.util.AbstractTestJSONSpecification
 import com.themodernway.logback.json.jackson.test.util.TestPOJO
 
-public class BasicTestsSpecification extends AbstractSpecification
+public class BasicTestsSpecification extends AbstractTestJSONSpecification
 {
     def setupSpec()
     {

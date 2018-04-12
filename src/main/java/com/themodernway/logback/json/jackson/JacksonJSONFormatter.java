@@ -37,7 +37,7 @@ import com.themodernway.logback.json.core.JSONFormattingException;
  * A {@code JacksonJSONFormatter} interface formats an object into a JSON string.
  *
  * @author Dean S. Jones
- * @since 2.0.1-SNAPSHOT
+ * @since 2.0.0-RELEASE
  */
 
 public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter, IJSONCommon
@@ -48,7 +48,7 @@ public class JacksonJSONFormatter extends ObjectMapper implements IJSONFormatter
 
     private static final DefaultPrettyPrinter PRETTY_PRINTER   = buildPrettyPrinter();
 
-    public static final DefaultPrettyPrinter buildPrettyPrinter()
+    private static final DefaultPrettyPrinter buildPrettyPrinter()
     {
         return new DefaultPrettyPrinter().withArrayIndenter(new DefaultIndenter().withIndent(JSON_INDENT_VALUE)).withObjectIndenter(new DefaultIndenter().withIndent(JSON_INDENT_VALUE));
     }

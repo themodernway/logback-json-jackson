@@ -1,6 +1,10 @@
 The Modern Way - Logback JSON Jackson
 ======
 
+![<TMW>](http://docs.themodernway.com/tmw4.jpg)
+
+The Modern Way - Logback JSON Jackson is a package containing the Jackson implementation of a JSON logger built on Logback.
+
 https://github.com/themodernway/logback-json-jackson
 
 Downloading artifacts
@@ -12,13 +16,13 @@ Maven:
 <dependency>
   <groupId>com.themodernway</groupId>
   <artifactId>logback-json-jackson</artifactId>
-  <version>2.0.17-SNAPSHOT</version>
+  <version>2.0.0-RELEASE</version>
 </dependency>
 ```
 Gradle:
 ```
 dependencies {
-    compile(group: 'com.themodernway', name: 'logback-json-jackson', version: '2.0.17-SNAPSHOT')
+    compile(group: 'com.themodernway', name: 'logback-json-jackson', version: '2.0.0-RELEASE')
 }
 ```
 Javadoc URL:
